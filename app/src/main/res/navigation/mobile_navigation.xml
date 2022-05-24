@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_chores">
+
+    <fragment
+        android:id="@+id/nav_chores"
+        android:name="com.example.learningnavigation.ui.Chores.ChoresFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_chores" />
+
+    <fragment
+        android:id="@+id/nav_instructions"
+        android:name="com.example.learningnavigation.ui.Instruction.InstructionFragment"
+        android:label="Custom1Fragment"
+        tools:layout="@layout/fragment_instruction"/>
+    <fragment
+        android:id="@+id/nav_personal"
+        android:name="com.example.learningnavigation.ui.Personal.PersonalFragment"
+        android:label="GreetingFragment"
+        tools:layout="@layout/fragment_personal"/>
+</navigation>

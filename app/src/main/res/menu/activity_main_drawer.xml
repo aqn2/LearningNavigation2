@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_chores"
+            android:icon="@android:drawable/ic_menu_day"
+            android:title="Chores" />
+        <item
+            android:id="@+id/nav_instructions"
+            android:icon="@android:drawable/ic_menu_info_details"
+            android:title="Instructions" />
+        <item
+            android:id="@+id/nav_personal"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="Personal" />
+    </group>
+</menu>
