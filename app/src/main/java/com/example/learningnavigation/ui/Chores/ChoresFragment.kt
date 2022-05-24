@@ -2,16 +2,12 @@ package com.example.learningnavigation.ui.Chores
 
 import android.os.Bundle
 import android.util.SparseBooleanArray
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ArrayAdapter
+import android.widget.CheckedTextView
 import androidx.fragment.app.Fragment
+import com.example.learningnavigation.R
 import com.example.learningnavigation.databinding.FragmentChoresBinding
-import kotlinx.android.synthetic.main.activity_main.*
-import androidx.drawerlayout.widget.DrawerLayout
-
-
 
 
 class ChoresFragment : Fragment() {
@@ -23,10 +19,12 @@ class ChoresFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private val booleanArray = BooleanArray(30)
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
 
         _binding = FragmentChoresBinding.inflate(inflater, container, false)
@@ -44,10 +42,12 @@ class ChoresFragment : Fragment() {
             binding.buttonAdd.visibility = View.VISIBLE
             binding.calendarView.visibility = View.VISIBLE
             setupCalendar()
+            setHasOptionsMenu(true)
             binding.editTextActivityInput.visibility = View.VISIBLE
             binding.editTextDate.visibility = View.VISIBLE
             binding.floatingButtonStartActivity.visibility = View.GONE
             binding.floatingButtonStopActivity.visibility = View.VISIBLE
+            binding.buttonDelete.visibility = View.GONE
 
         }
 
@@ -59,6 +59,7 @@ class ChoresFragment : Fragment() {
             binding.editTextDate.visibility = View.INVISIBLE
             binding.floatingButtonStopActivity.visibility = View.GONE
             binding.floatingButtonStartActivity.visibility = View.VISIBLE
+            binding.buttonDelete.visibility = View.GONE
 
         }
 
@@ -84,6 +85,10 @@ class ChoresFragment : Fragment() {
         }
 
         binding.listView.setOnItemClickListener { adapterView, view, i, l ->
+
+            val checkedTextView = view as CheckedTextView
+            checkedTextView.isChecked = !checkedTextView.isChecked
+            booleanArray.set(i, true)
             binding.listView.checkedItemPosition
             binding.buttonDelete.visibility = View.VISIBLE
             android.widget.Toast.makeText(
@@ -98,9 +103,10 @@ class ChoresFragment : Fragment() {
         // Selecting and Deleting the items from the list when the delete button is pressed
 
         binding.buttonDelete.setOnClickListener {
-            val position: SparseBooleanArray = binding.listView.checkedItemPositions
+            //val position: SparseBooleanArray = binding.listView.checkedItemPositions
             val count = binding.listView.count
             var item = count - 1
+            /*
             while (item >= 0) {
                 if (position.get(item)) {
                     adapter.remove(itemlist.get(item))
@@ -108,7 +114,17 @@ class ChoresFragment : Fragment() {
                 }
                 item--
             }
-            position.clear()
+
+             */
+
+            //position.clear()
+
+            while (item >= 0) {
+                if (booleanArray[item]) {
+                    adapter.remove(itemlist.get(item))
+                }
+                item--
+            }
             adapter.notifyDataSetChanged()
 
         }
@@ -129,6 +145,30 @@ class ChoresFragment : Fragment() {
         _binding = null
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.chores_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_sortDate ->{
+                android.widget.Toast.makeText(
+                    requireActivity(),
+                    "Sorting by Date",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
+            R.id.menu_sortImportance ->{
+                android.widget.Toast.makeText(
+                    requireActivity(),
+                    "Sorting by Importance",
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        return true
+    }
+
     private fun setupCalendar() {
         binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
             // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
@@ -140,6 +180,8 @@ class ChoresFragment : Fragment() {
 
 
 
+
 }
+
 
 
