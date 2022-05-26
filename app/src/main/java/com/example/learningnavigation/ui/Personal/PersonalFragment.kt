@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.example.learningnavigation.MainActivity
 import com.example.learningnavigation.R
 import com.example.learningnavigation.databinding.FragmentPersonalBinding
 
@@ -33,7 +34,8 @@ class PersonalFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textView3
-        textView.text = "This is the Greeting Fragment"
+
+        textView.text = "Tasks Created: " + (activity as MainActivity).tasksCreated.toString() + "\n" + "Tasks Completed: " + (activity as MainActivity).tasksCompleted ++
 
 
         return root

@@ -6,8 +6,12 @@ import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.CheckedTextView
 import androidx.fragment.app.Fragment
+import com.example.learningnavigation.Communicator
 import com.example.learningnavigation.R
 import com.example.learningnavigation.databinding.FragmentChoresBinding
+//import android.arch.lifecycle.ViewModelProviders
+import android.widget.Toast
+import com.example.learningnavigation.MainActivity
 
 
 class ChoresFragment : Fragment() {
@@ -21,11 +25,17 @@ class ChoresFragment : Fragment() {
 
     private val booleanArray = BooleanArray(30)
 
+    private var model: Communicator?=null
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
+
+        //model= ViewModelProviders.of(requireActivity()).get(Communicator::class.java)
+
 
         _binding = FragmentChoresBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -81,6 +91,8 @@ class ChoresFragment : Fragment() {
             // This is because every time when you add the item the input space or the eidt text space will be cleared
             binding.editTextActivityInput.text.clear()
 
+            (activity as MainActivity).tasksCreated ++
+
 
         }
 
@@ -91,10 +103,10 @@ class ChoresFragment : Fragment() {
             booleanArray.set(i, true)
             binding.listView.checkedItemPosition
             binding.buttonDelete.visibility = View.VISIBLE
-            android.widget.Toast.makeText(
+            Toast.makeText(
                 requireActivity(),
                 "You Selected the item --> " + itemlist.get(i),
-                android.widget.Toast.LENGTH_SHORT
+                Toast.LENGTH_SHORT
             ).show()
 
         }
@@ -122,10 +134,23 @@ class ChoresFragment : Fragment() {
             while (item >= 0) {
                 if (booleanArray[item]) {
                     adapter.remove(itemlist.get(item))
+                    (activity as MainActivity).tasksCompleted ++
                 }
                 item--
             }
             adapter.notifyDataSetChanged()
+
+            /*
+
+            model!!.setMsgCommunicator("Tasks Created: " + tasksCreated.toString() + "Tasks Completed: " + tasksCompleted.toString())
+            //Launch the data receiver fragment
+            val myfragment = ReceiveFragment()
+            val fragmentTransaction = fragmentManager!!.beginTransaction()
+            fragmentTransaction.replace(R.id.framefragmenthome, myfragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+
+             */
 
         }
 
@@ -152,17 +177,17 @@ class ChoresFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_sortDate ->{
-                android.widget.Toast.makeText(
+                Toast.makeText(
                     requireActivity(),
                     "Sorting by Date",
-                    android.widget.Toast.LENGTH_SHORT
+                    Toast.LENGTH_SHORT
                 ).show()
             }
             R.id.menu_sortImportance ->{
-                android.widget.Toast.makeText(
+                Toast.makeText(
                     requireActivity(),
                     "Sorting by Importance",
-                    android.widget.Toast.LENGTH_SHORT
+                    Toast.LENGTH_SHORT
                 ).show()
             }
         }

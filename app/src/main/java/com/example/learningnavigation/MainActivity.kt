@@ -13,12 +13,26 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.learningnavigation.databinding.ActivityMainBinding
+
+class Communicator : ViewModel(){
+
+    val message = MutableLiveData<Any>()
+
+    fun setMsgCommunicator(msg:String){
+        message.setValue(msg)
+    }
+}
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    public var tasksCreated = 0
+    public var tasksCompleted = 0
 
 
 
@@ -53,6 +67,8 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
 
 
 
