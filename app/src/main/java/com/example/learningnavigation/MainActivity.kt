@@ -17,14 +17,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.learningnavigation.databinding.ActivityMainBinding
 
-class Communicator : ViewModel(){
-
-    val message = MutableLiveData<Any>()
-
-    fun setMsgCommunicator(msg:String){
-        message.setValue(msg)
-    }
-}
 
 class MainActivity : AppCompatActivity() {
 

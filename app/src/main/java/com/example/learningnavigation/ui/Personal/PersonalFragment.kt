@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import com.example.learningnavigation.MainActivity
 import com.example.learningnavigation.R
 import com.example.learningnavigation.databinding.FragmentPersonalBinding
+import org.w3c.dom.Text
 
 class PersonalFragment : Fragment() {
 
@@ -33,9 +34,18 @@ class PersonalFragment : Fragment() {
         _binding = FragmentPersonalBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textView3
+        val textViewTC: TextView = binding.textViewTasksCreated
+        val textViewTC2: TextView = binding.textViewTasksCompleted
+        val textViewPM: TextView = binding.textViewTasksPerMonth
+        val textViewPM2: TextView = binding.textViewTasksPerMonthCompleted
 
-        textView.text = "Tasks Created: " + (activity as MainActivity).tasksCreated.toString() + "\n" + "Tasks Completed: " + (activity as MainActivity).tasksCompleted ++
+        textViewTC.text = "Tasks Created: " + (activity as MainActivity).tasksCreated.toString()
+
+        textViewTC2.text = "Tasks Completed: " + (activity as MainActivity).tasksCompleted.toString()
+
+        textViewPM.text = "Tasks Created Per Month: " + ((activity as MainActivity).tasksCreated/12).toString()
+
+        textViewPM2.text = "Tasks Completed Per Month: " + ((activity as MainActivity).tasksCompleted/12).toString()
 
 
         return root
@@ -46,3 +56,7 @@ class PersonalFragment : Fragment() {
         _binding = null
     }
 }
+
+
+
+

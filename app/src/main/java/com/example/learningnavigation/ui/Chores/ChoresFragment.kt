@@ -1,16 +1,15 @@
 package com.example.learningnavigation.ui.Chores
 
 import android.os.Bundle
-import android.util.SparseBooleanArray
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.CheckedTextView
 import androidx.fragment.app.Fragment
-import com.example.learningnavigation.Communicator
 import com.example.learningnavigation.R
 import com.example.learningnavigation.databinding.FragmentChoresBinding
 //import android.arch.lifecycle.ViewModelProviders
 import android.widget.Toast
+import androidx.collection.arrayMapOf
 import com.example.learningnavigation.MainActivity
 
 
@@ -23,9 +22,14 @@ class ChoresFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    private val booleanArray = BooleanArray(30)
+    private val booleanArray = BooleanArray(1000)
 
-    private var model: Communicator?=null
+    private val activityArray = ArrayList<String>(100)
+
+
+
+
+    private var tempDate = 0
 
 
     override fun onCreateView(
@@ -40,11 +44,19 @@ class ChoresFragment : Fragment() {
         _binding = FragmentChoresBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+
+
         var itemlist = arrayListOf<String>()
         var adapter = ArrayAdapter<String>(
             requireActivity(),
             android.R.layout.simple_list_item_multiple_choice, itemlist
         )
+
+
+        //var x = 0
+        //while(x <= 99){
+         //   activityArray.set(x, "")
+        //}
 
 
         binding.floatingButtonStartActivity.setOnClickListener{
@@ -92,6 +104,11 @@ class ChoresFragment : Fragment() {
             binding.editTextActivityInput.text.clear()
 
             (activity as MainActivity).tasksCreated ++
+
+            //dateArray.(tempDate, binding.editTextDate.text.toString() + binding.editTextActivityInput.text.toString())
+            //activityArray.set(tempDate, binding.editTextDate.text.toString() + binding.editTextActivityInput.text.toString())
+
+
 
 
         }
@@ -154,6 +171,37 @@ class ChoresFragment : Fragment() {
 
         }
 
+        /*
+
+        binding.buttonSortByDate.setOnClickListener {
+
+            val count = binding.listView.count
+            var item = count - 1
+            while (item >= 0) {
+                adapter.remove(itemlist.get(item))
+                item--
+            }
+            adapter.notifyDataSetChanged()
+
+
+            var orderedNum = activityArray.size -1
+
+            var x = 0
+
+            while(x <= orderedNum ){
+                if(activityArray.get(x) != null){
+                    adapter.add(activityArray.get(x))
+                }
+                orderedNum ++
+            }
+            adapter.notifyDataSetChanged()
+
+
+        }
+
+
+         */
+
 
 
 
@@ -177,30 +225,27 @@ class ChoresFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_sortDate ->{
-                Toast.makeText(
-                    requireActivity(),
-                    "Sorting by Date",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            R.id.menu_sortImportance ->{
-                Toast.makeText(
-                    requireActivity(),
-                    "Sorting by Importance",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        }
-        return true
-    }
 
-    private fun setupCalendar() {
-        binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            // Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
-            val msg = (month + 1).toString() + "/" + dayOfMonth + "/" + year
-            binding.editTextDate.setText("Date: " + msg + " ")
-        }
-    }
+            Toast.makeText(
+                requireActivity(),
+                "Sorting by Date",
+                Toast.LENGTH_SHORT
+    ).show()
+}
+}
+return true
+}
+
+
+private fun setupCalendar() {
+binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
+// Note that months are indexed from 0. So, 0 means January, 1 means february, 2 means march etc.
+val msg = (month + 1).toString() + "/" + dayOfMonth + "/" + year
+binding.editTextDate.setText("Date: " + msg + " ")
+
+tempDate = dayOfMonth
+}
+}
 
 
 
