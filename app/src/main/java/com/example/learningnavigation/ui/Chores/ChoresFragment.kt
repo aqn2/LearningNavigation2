@@ -70,6 +70,7 @@ class ChoresFragment : Fragment() {
             binding.floatingButtonStartActivity.visibility = View.GONE
             binding.floatingButtonStopActivity.visibility = View.VISIBLE
             binding.buttonDelete.visibility = View.GONE
+            binding.editTextActivityInput.setText("Activity")
 
         }
 
