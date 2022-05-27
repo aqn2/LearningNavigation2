@@ -1,5 +1,4 @@
-package com.example.learningnavigation.ui
-
+package com.example.learningnavigation.ui.Instruction
 import android.app.Activity
 import android.os.Bundle
 import android.util.Log
@@ -21,7 +20,6 @@ import com.example.learningnavigation.ui.Instruction.Instructions
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.Calendar.getInstance
-
 
 class InstructionFragment : Fragment() {
 
