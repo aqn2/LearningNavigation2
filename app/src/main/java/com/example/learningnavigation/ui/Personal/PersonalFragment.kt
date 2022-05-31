@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.learningnavigation.MainActivity
 import com.example.learningnavigation.R
 import com.example.learningnavigation.databinding.FragmentPersonalBinding
@@ -46,6 +47,11 @@ class PersonalFragment : Fragment() {
         textViewPM.text = "Tasks Created Per Month: " + ((activity as MainActivity).tasksCreated/12).toString()
 
         textViewPM2.text = "Tasks Completed Per Month: " + ((activity as MainActivity).tasksCompleted/12).toString()
+
+
+        binding.buttonPersonalBack.setOnClickListener{
+            findNavController().navigate(R.id.nav_chores)
+        }
 
 
         return root

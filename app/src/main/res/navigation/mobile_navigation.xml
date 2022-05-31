@@ -15,10 +15,18 @@
         android:id="@+id/nav_instructions"
         android:name="com.example.learningnavigation.ui.Instruction.InstructionFragment"
         android:label="Custom1Fragment"
-        tools:layout="@layout/fragment_instruction"/>
+        tools:layout="@layout/fragment_instruction">
+        <action
+            android:id="@+id/action_nav_instructions_to_nav_chores"
+            app:destination="@id/nav_chores" />
+    </fragment>
     <fragment
         android:id="@+id/nav_personal"
         android:name="com.example.learningnavigation.ui.Personal.PersonalFragment"
         android:label="GreetingFragment"
-        tools:layout="@layout/fragment_personal"/>
+        tools:layout="@layout/fragment_personal">
+        <action
+            android:id="@+id/action_nav_personal_to_nav_chores"
+            app:destination="@id/nav_chores" />
+    </fragment>
 </navigation>

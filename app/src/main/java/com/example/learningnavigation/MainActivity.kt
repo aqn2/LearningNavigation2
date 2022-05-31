@@ -1,5 +1,6 @@
 package com.example.learningnavigation
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.SparseBooleanArray
 import android.view.Menu
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.learningnavigation.databinding.ActivityMainBinding
+import com.example.learningnavigation.ui.Instruction.InstructionDetail
 
 
 class MainActivity : AppCompatActivity() {
@@ -27,12 +29,7 @@ class MainActivity : AppCompatActivity() {
     public var tasksCompleted = 0
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
-
 
 
         super.onCreate(savedInstanceState)
@@ -61,9 +58,6 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
 
-
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -72,8 +66,10 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
+

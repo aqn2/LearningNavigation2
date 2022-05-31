@@ -12,9 +12,13 @@ import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.learningnavigation.MainActivity
 import com.example.learningnavigation.R
 import com.example.learningnavigation.databinding.FragmentInstructionBinding
+import com.example.learningnavigation.ui.Chores.ChoresFragment
 import com.example.learningnavigation.ui.Instruction.InstructionAdapter
 import com.example.learningnavigation.ui.Instruction.Instructions
 import com.google.gson.Gson
@@ -56,6 +60,10 @@ class InstructionFragment : Fragment() {
         adapter = InstructionAdapter(instructionsList)
         binding.recyclerViewInstructionsList.adapter = adapter
         binding.recyclerViewInstructionsList.layoutManager = LinearLayoutManager(this.activity)
+
+        binding.buttonInstructionBack.setOnClickListener{
+            findNavController().navigate(R.id.nav_chores)
+        }
 
         return binding.root
     }
